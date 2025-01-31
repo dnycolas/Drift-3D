@@ -39,13 +39,19 @@ public class Carmovement : MonoBehaviour
 
         MoveForce = Vector3.Lerp(MoveForce.normalized, transform.forward, Traction * Time.deltaTime) * MoveForce.magnitude;
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift))
         {
-
-            MaxSpeed += 0.5f * Time.deltaTime ;
-
+            MaxSpeed = 25;
+            MoveForce += transform.forward * MoveSpeed * Input.GetAxis("Vertical") * Time.deltaTime;
         }
-        
+        else if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            MaxSpeed = 15; // Volta ao valor padrão quando solta o Shift
+        }
+
+
+
+
     }
 
 }
